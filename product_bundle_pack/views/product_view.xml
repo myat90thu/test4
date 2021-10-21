@@ -91,16 +91,16 @@
             <field name="view_mode">kanban,tree,form</field>
         </record>
 
-        <record id="product_bundle_inherit_job_cost_form" model="ir.ui.view">
-            <field name="name">job.costing</field>
-            <field name="model">job.costing</field>
-            <field name="inherit_id" ref="job_costing_management.job_costing_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//notebook/page/field[@name='job_cost_line_ids']" position="before">
-                      <button name="product_bundle_pack.bi_act_product_bundle_wizard" string="Add Group" type="action"/>
-                </xpath>
-            </field>
-        </record>
+<!--        <record id="product_bundle_inherit_job_cost_form" model="ir.ui.view">-->
+<!--            <field name="name">job.costing</field>-->
+<!--            <field name="model">job.costing</field>-->
+<!--            <field name="inherit_id" ref="job_costing_management.job_costing_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//notebook/page/field[@name='job_cost_line_ids']" position="before">-->
+<!--                      <button name="product_bundle_pack.bi_act_product_bundle_wizard" string="Add Group" type="action"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
 
   </data>   
 </odoo>
