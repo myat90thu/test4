@@ -39,31 +39,6 @@
             </field>
         </record>
 
-        <!-- Inherit Form View to Modify it -->
-        <record id="inherit_crm_project_information" model="ir.ui.view">
-            <field name="name">Inherit Crm Project Information</field>
-            <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="job_costing_management.view_crm_lead_inherited"/>
-            <field name="arch" type="xml">
-                <xpath expr="//notebook//page//group//group//field[@name='project_name']" position="replace">
-                    <field name="project_name_n"/>
-                    <field name="project_type"/>
-                </xpath>
-                <xpath expr="//notebook//page//group//group//field[@name='consultant_name']" position="replace">
-                    <field name="consultant_n"/>
-                </xpath>
-                <xpath expr="//notebook//page//group//group//field[@name='mep_contractor_name']" position="replace">
-                    <field name="mep_contractor_name_n"/>
-                </xpath>
-                <xpath expr="//notebook//page//group//group//field[@name='contractor_name']" position="replace">
-                    <field name="contractor_name_n"/>
-                </xpath>
-            </field>
-
-        </record>
-
-
-
     <record id="view_project_type_form" model="ir.ui.view">
         <field name="name">view.project.type.form</field>
         <field name="model">project.type</field>

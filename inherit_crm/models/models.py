@@ -20,12 +20,6 @@ class CrmLead(models.Model):
         vals.update({'lead_number': lead_number})
         return super(CrmLead, self).create(vals)
 
-    project_name_n = fields.Many2one('project.project', string="Project Name")
-    project_type = fields.Many2one(related='project_name_n.project_type', string="Project Type")
-    consultant_n = fields.Many2one('res.partner', 'Consultant')
-    mep_contractor_name_n = fields.Many2one('res.partner', 'MEP Contractor')
-    contractor_name_n = fields.Many2one('res.partner', 'Contractor')
-
 
 class ProjectType(models.Model):
     _name = 'project.type'
