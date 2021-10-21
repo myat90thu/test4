@@ -5,7 +5,8 @@
 {
     'name': "Project Job Costing (Contracting) and Job Cost Sheet",
     'version': '2.7.4.17',
-    'depends': ['sale','sale_management',
+    'depends': ['sale',
+                'sale_management',
                 'project',
                 'purchase',
                 'note',
@@ -13,6 +14,7 @@
                 'stock_account',
                 'material_purchase_requisitions',
                 'crm',
+                'inherit_crm'
                 ],
     'category' : 'Projects',
     'license': 'Other proprietary',
