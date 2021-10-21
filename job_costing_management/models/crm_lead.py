@@ -19,7 +19,7 @@ class CRMLead(models.Model):
     # Project INFORMATION PAGE
     project_information = fields.Char(string='Project Information*')
     project_name = fields.Many2one('project.project', string="Project Name")
-    project_type = fields.Many2one(related='project_name.project_type', string="Project Type")
+    project_type = fields.Many2one(related='project_name.project_type',string="Project Type")
     consultant_name = fields.Many2one('res.partner', 'Consultant')
     mep_contractor_name = fields.Many2one('res.partner', 'MEP Contractor')
     # project_name = fields.Char(string='Project Name*')
