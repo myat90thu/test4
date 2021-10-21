@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+
+<odoo>
+
+<!--        <record id="email_template" model="mail.template">-->
+<!--           <field name="name">Email Template</field>-->
+<!--           <field name="model_id" ref="sale.model_sale_order"/>-->
+<!--           <field name="email_from">${(object.company_id.email |safe}</field>-->
+<!--           <field name="email_to" >${object.partner_id.email}</field>-->
+<!--           <field name="subject">Ref ${object.name or 'n/a' }</field>-->
+<!--           <field name="auto_delete" eval="True"/>-->
+<!--           <field name="lang">${object.partner_id.lang}</field>-->
+<!--           <field name="body_html"><![CDATA[-->
+<!--            <div>-->
+<!--               <h1>Cover Letter</h1>-->
+<!--               <br/>-->
+<!--               <p>-->
+<!--                <h3>Ref No: ${object.name or 'n/a' } </h3>-->
+<!--                <h3>Date: ${object.date_order or 'n/a' }</h3>-->
+<!--               </p>-->
+<!--               <p>-->
+<!--               Dear Sir,-->
+<!--                  It’s our immense pleasure to quote you for the above subject enquiry,-->
+<!--                  Kindly find below our offer as per the project requirement.-->
+<!--                  Hope the offer is in line & matching with your requirement.-->
+<!--                  Feel free to contact us for any clarifications & Negotiations.-->
+<!--               </p>-->
+<!--               <br/>-->
+<!--               <h3>Sales Person Details</h3>-->
+
+<!--            <table border="1" width="50%" cellpadding="0" bgcolor="#ededed"-->
+<!--                  style="padding: 20px; background-color: #ededed;">-->
+<!--                  <tbody>-->
+<!--                  <tr><td>Name: ${object.user_id.name or 'n/a' }</td></tr>-->
+<!--                  <tr><td>Team Name: ${object.team_id.name or 'n/a' }</td></tr>-->
+<!--                  <tr><td>Company: ${object.company_id.name or 'n/a' }</td></tr>-->
+<!--                  <tr><td>Phone: ${object.user_id.partner_id.phone or 'n/a' }</td></tr>-->
+<!--                  <tr><td>Email: ${object.user_id.partner_id.email or 'n/a' }</td></tr>-->
+<!--               </tbody>-->
+<!--               </table>-->
+<!--               <br/>-->
+<!--               <table border="1" width="100%" cellpadding="0" bgcolor="#ededed"-->
+<!--                  style="padding: 20px; background-color: #ededed;">-->
+
+<!--                  <thead>-->
+
+<!--                  <tr>  <th>Sr:</th>-->
+<!--                        <th>Model:</th>-->
+<!--                        <th>Brand:</th>-->
+<!--                        <th>Description:</th>-->
+<!--                        <th>Qty:</th>-->
+<!--                        <th>Unit Price:</th>-->
+<!--                        <th>Total Price:</th>-->
+<!--                  </tr>-->
+<!--                  </thead>-->
+<!--                  <tbody>-->
+<!--                  <t t-set="i" t-value="1"/>-->
+<!--                  % for line in object.order_line:-->
+<!--                     <tr>-->
+<!--                        <td><span t-esc="i"/></td>-->
+<!--                        <t t-set="i" t-value="i+1"/>-->
+<!--                        <td></td>-->
+<!--                        <td></td>-->
+<!--                        <td>${line.name or ''}</td>-->
+<!--                        <td>${line.product_uom_qty or ''}</td>-->
+<!--                        <td>${line.price_unit or ''}</td>-->
+<!--                        <td>${line.price_subtotal or ''}</td>-->
+<!--                     </tr>-->
+<!--                  %endfor-->
+<!--                  </tbody>-->
+<!--               </table>-->
+<!--               </div>-->
+<!--        <br/>-->
+
+<!--     <div class="footer" style="font-size:11px;">-->
+<!--            <div>-->
+<!--                <style>-->
+<!--                    h6{-->
+<!--                    font-size:13px;-->
+<!--                    }-->
+<!--                    p{-->
+<!--                    font-family:bold;-->
+<!--                    }-->
+<!--                </style>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-4" style="border-bottom:1px solid;">-->
+<!--                    </div>-->
+<!--                    <div class="col-4 text-center" style="margin-bottom:-13px;">-->
+<!--                        <p>Engineering Solution and Services</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-4" style="border-bottom:1px solid;">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <br/>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-3" style="border-right:1px solid;">-->
+<!--                        <h6>Corporate Head Office</h6>-->
+<!--                        <h5 style="font-family:bold;">TECHNOSTREAM</h5>-->
+<!--                        <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>-->
+<!--                        <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,SA</h6>-->
+<!--                    </div>-->
+<!--                    <div class="col-3" style="border-right:1px solid;">-->
+<!--                        <h6>Dubai Office</h6>-->
+<!--                        <h5 style="font-family:bold;">TECHNOSTREAM</h5>-->
+<!--                        <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>-->
+<!--                        <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,SA</h6>-->
+<!--                    </div>-->
+<!--                    <div class="col-3">-->
+<!--                        <h6>Abu Dhabi Office</h6>-->
+<!--                        <h5 style="font-family:bold;">Bin Hilal TECHNOSTREAM</h5>-->
+<!--                        <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>-->
+<!--                        <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,SA</h6>-->
+<!--                    </div>-->
+<!--                    <div class="col-3">-->
+<!--                        <h6>Palestine</h6>-->
+<!--                        <h5 style="font-family:bold;">Technostream - Palestine</h5>-->
+<!--                        <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>-->
+<!--                        <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,SA</h6>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--               ]]>-->
+<!--           </field>-->
+<!--       </record>-->
+
+</odoo>

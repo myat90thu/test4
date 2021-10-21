@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="product_bundle_product_form_view" model="ir.ui.view">
+            <field name="name">product.product.pack</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_title')]/div[@name='options']" position="inside">
+                    <div>
+                    <field name="is_pack"/>  
+                    <label for="is_pack"/> 
+                </div>
+                </xpath>
+<!--                <field name="list_price" position="replace">-->
+<!--                    <field name="list_price" widget='monetary' -->
+<!--                        attrs= "{'readonly':[('cal_pack_price','=', True)]}"-->
+<!--                        options="{'currency_field': 'currency_id'}"-->
+<!--                     />-->
+<!--                </field>-->
+<!--                <group name="group_standard_price" position="inside">-->
+<!--                                        <field name="cal_pack_price" attrs= "{'invisible':[('is_pack','=', False)]}"/>-->
+<!--                                    </group>-->
+                <xpath expr="//page[@name='inventory']" position="after">
+                    <page string='Products Group' attrs= "{'invisible':[('is_pack','!=', True)]}" name="pack_product">
+                        <field name="group_lines">
+                            <tree string="Pack Products" editable="bottom">
+                                <control>
+                                    <create string="Add a product"/>
+                                </control>
+                                <field name="product_id"/>
+                                <field name="name"/>
+                                <field name="qty_uom"/>
+                                <field name="price"/>
+                                <field name="uom_id"/>
+                                <field name="discount" sum="Total" optional="hide"/>
+                                <field name="unit_list_price" sum="Total" optional="hide"/>
+                                <field name="unit_net_price" sum="Total" optional="hide"/>
+                                <field name="total_net_price" sum="Total" optional="hide"/>
+                                <field name="unit_landed_cost" sum="Total" optional="hide"/>
+                                <field name="total_landed_cost" sum="Total" optional="hide"/>
+                                <field name="unit_cost_oh" sum="Total" optional="hide"/>
+                                <field name="total_cost_oh" sum="Total" optional="hide"/>
+                                <field name="unit_selling_price" sum="Total" optional="hide"/>
+                                <field name="total_selling_price" sum="Total" optional="hide"/>
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right" name="group_total">
+                                <field name="total_discount" widget="monetary"/>
+                                <field name="total_ulp" widget="monetary"/>
+                                <field name="total_unp" widget="monetary"/>
+                                <field name="total_tnp" widget="monetary"/>
+                                <field name="total_ulc" widget="monetary"/>
+                                <field name="total_tlc" widget="monetary"/>
+                                <field name="total_ucoh" widget="monetary"/>
+                                <field name="total_tcoh" widget="monetary"/>
+                                <field name="total_usp" widget="monetary"/>
+                                <field name="total_tsp" widget="monetary"/>
+                            </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    
+        <record id="product_template_inherit_form" model="ir.ui.view">
+            <field name="name">product.product.pack</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='variants']" position="attributes">
+                  <attribute name="attrs">{'invisible':[('is_pack','=', True)]}</attribute> 
+                </xpath>
+                <xpath expr="//notebook/page[@name='variants']" position="after">
+                  <page string="Variants" name="bi_variants" attrs="{'invisible':[('is_pack','=', False)]}">
+                    <h1> You cannot create variants of the Pack </h1>
+                  </page>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="action_pack" model="ir.actions.act_window">
+            <field name="name">Product Packs</field>
+            <field name="res_model">product.template</field>
+            <field name="domain">[('is_pack', '=', True)]</field>
+            <field name="context">{'default_is_pack':True}</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record id="product_bundle_inherit_job_cost_form" model="ir.ui.view">
+            <field name="name">job.costing</field>
+            <field name="model">job.costing</field>
+            <field name="inherit_id" ref="job_costing_management.job_costing_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='job_cost_line_ids']" position="before">
+                      <button name="product_bundle_pack.bi_act_product_bundle_wizard" string="Add Group" type="action"/>
+                </xpath>
+            </field>
+        </record>
+
+  </data>   
+</odoo>
+
