@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="delivery_inherit_id" model="ir.ui.view">
+            <field name="name">Delivery Inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Membership">
+                        <group>
+                            <group>
+                                <field name="text"/>
+                                <field name="place_mark"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

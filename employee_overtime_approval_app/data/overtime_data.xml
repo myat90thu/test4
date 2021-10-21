@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo>
+	<data noupdate="0">
+
+        <record id="sequence_hr_overtime" model="ir.sequence">
+            <field name="name">Hr Overtime</field>
+            <field name="code">hr.overtime.request</field>
+            <field name="prefix">HREMP/OVT/</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="rule_category" model="hr.salary.rule.category">
+            <field name="name">Overtime</field>
+            <field name="code">EMPOVERTIME</field>
+        </record>
+
+        <!--Overtime Salary Rule -->
+<!--         <record id="hr_salary_rule_overtime" model="hr.salary.rule">
+            <field name="name">Employee OverTime</field>
+            <field name="category_id" ref="rule_category"/>
+            <field name="code">EMPOVERTIME</field>
+            <field name="sequence" eval="21"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = payslip.overtime_wages</field>
+            <field name="note">Overtime calculation based on Employee Request</field>
+            <field name="struct_id" ref="hr_payroll.structure_002"/>
+        </record> -->
+
+	</data>
+</odoo>

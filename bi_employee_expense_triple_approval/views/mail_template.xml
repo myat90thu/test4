@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="email_template_hr_approved_expense_request12" model="mail.template">
+            <field name="name">HR Approved Expense Request</field>
+            <field name="subject">${object.name} - Expense sheet Approve </field>
+            <field name="model_id" ref="bi_employee_expense_triple_approval.model_hr_expense_sheet" />
+            <field name="auto_delete" eval="True" />
+            <field name="body_html"><![CDATA[
+                    <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                        <p>Respected HR Manager,</p>
+                        <p>${object.name} - Need to approve this Expense Sheet.</p>
+                        <br /><br />
+                        <p> Thank You</p>
+                    </div>
+                        ]]>
+            </field>
+        </record>
+
+
+<!-- </data>-->
+</odoo>

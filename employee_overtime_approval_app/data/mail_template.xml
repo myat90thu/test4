@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+	<data noupdate="1">
+
+		<record id="overtime_request_email_template" model="mail.template">
+			<field name="name">Overtime Request Template</field>
+			<field name="model_id" ref="employee_overtime_approval_app.model_hr_overtime_request"/>
+			<field name="subject">Overtime Request</field>
+		</record>
+
+		<record id="overtime_request_approve_department_email_template" model="mail.template">
+			<field name="name">Overtime Request Approved By Department</field>
+			<field name="model_id" ref="employee_overtime_approval_app.model_hr_overtime_request"/>
+			<field name="subject">Overtime Request Approved By Department</field>
+		</record>
+
+		<record id="overtime_request_reject_department_email_template" model="mail.template">
+			<field name="name">Overtime Request Reject By Department</field>
+			<field name="model_id" ref="employee_overtime_approval_app.model_hr_overtime_request"/>
+			<field name="subject">Overtime Request Reject By Department</field>
+		</record>
+
+		<record id="overtime_request_approve_manager_email_template" model="mail.template">
+			<field name="name">Overtime Request Approved By Manager</field>
+			<field name="model_id" ref="employee_overtime_approval_app.model_hr_overtime_request"/>
+			<field name="subject">Overtime Request Approved By Manager</field>
+		</record>
+
+		<record id="overtime_request_reject_manager_email_template" model="mail.template">
+			<field name="name">Overtime Request Reject By Manager</field>
+			<field name="model_id" ref="employee_overtime_approval_app.model_hr_overtime_request"/>
+			<field name="subject">Overtime Request Reject By Manager</field>
+		</record>
+
+	</data>
+</odoo>

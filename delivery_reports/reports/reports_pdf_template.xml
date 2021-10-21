@@ -1,0 +1,344 @@
+<odoo>
+    <template id="delivery_reports.report_delivery_reports_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="margin-top:-30px;font-size:13px;">
+                        <div class="container text-center"
+                             style="border:1px solid;background-color: #d3d3d3;">
+                            <h4 style="padding-top:8px;font-family:bold">Delivery Note</h4>
+                        </div>
+                        <br/>
+                        <div class="container">
+                            <style>
+                                @font-face {
+                                font-family: 'Scheherazade', serif;
+                                src: url('https://fonts.googleapis.com/css2'); /*URL to font*/
+                                font-size:13px;
+                                }
+
+                                td, th {
+                                border: 1px solid #999;
+                                padding: 0.5rem;
+                                text-align: left;
+                                font-size:13px;
+                                }
+
+                                th{
+                                background-color: #d3d3d3;
+                                }
+                                p{
+                                font-weight:bold;
+                                padding-top:6px;
+                                font-size:13px;
+                                }
+                                span{
+                                padding-top:6px;
+                                font-size:13px;
+
+                                }
+                                h5{
+                                padding-top:1px;
+                                font-weight: bold;
+                                font-family: 'Scheherazade', serif;
+                                font-size:20px;
+
+                                }
+                            </style>
+
+                            <div class="row" style="height:30px;">
+                                <div class="col-3" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Date</p>
+                                </div>
+                                <div class="col-6" style="border:1px solid;">
+                                    <span t-field="o.scheduled_date"/>
+                                </div>
+                                <div class="col-3 text-right" style="background-color: #d3d3d3; border:1px solid ;">
+                                    <h5>:التاريخ</h5>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-3" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Customer Name:</p>
+                                </div>
+                                <div class="col-6" style="border:1px solid; ">
+                                    <span t-field="o.partner_id"/>
+                                </div>
+                                <div class="col-3 text-right" style="background-color: #d3d3d3; border:1px solid ;">
+                                    <h5>:اسم الزبون</h5>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-3" style="background-color: #d3d3d3; border:1px solid; ">
+                                    <p>Project Name:</p>
+                                </div>
+                                <div class="col-6" style=" border:1px solid; ">
+                                    <span t-field="o.project_id"/>
+
+                                </div>
+                                <div class="col-3 text-right" style="background-color: #d3d3d3; border:1px solid;">
+                                    <h5>:اسم المشروع</h5>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-3" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Project Ref:</p>
+                                </div>
+                                <div class="col-6" style="border:1px solid;">
+                                    <span t-field="o.job_order_number"/>
+
+                                </div>
+                                <div class="col-3 text-right" style="background-color: #d3d3d3; border:1px solid ;">
+                                    <h5>:مَرْجِع المشروع</h5>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-3" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Contact Person</p>
+                                </div>
+                                <div class="col-6" style="border:1px solid;">
+                                    <span t-field="o.partner_id"/>
+                                </div>
+                                <div class="col-3 text-right" style="background-color: #d3d3d3; border:1px solid ;">
+                                    <h5>:أشخاص الاتصال</h5>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-3" style="background-color: #d3d3d3; border:1px solid; ">
+                                    <p>Address:</p>
+                                </div>
+                                <div class="col-6" style="border:1px solid;">
+                                    <span t-field="o.partner_id.street"/>,
+                                    <span t-field="o.partner_id.street2"/>,
+                                    <span t-field="o.partner_id.city"/>,
+                                    <span t-field="o.partner_id.state_id"/>,
+                                    <span t-field="o.partner_id.zip"/>,
+                                    <span t-field="o.partner_id.country_id"/>
+                                </div>
+                                <div class="col-3 text-right" style="background-color: #d3d3d3; border:1px solid ;">
+                                    <h5>:عنوان</h5>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-3" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Telephone:</p>
+                                </div>
+                                <div class="col-6" style="border:1px solid; ">
+                                    <span t-field="o.partner_id.phone"/>
+                                </div>
+                                <div class="col-3 text-right" style="background-color: #d3d3d3; border:1px solid ; ">
+                                    <h5>:رقم الهاتف</h5>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br/>
+                        <div>
+
+                            <table class="container border" style="border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th>Sn</th>
+                                        <th>Model</th>
+                                        <th>Description</th>
+                                        <th>Qty</th>
+                                        <th>Unit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <t t-set="count_id" t-value="0"/>
+
+                                    <t t-foreach="o.move_ids_without_package" t-as="pk">
+
+
+                                        <t t-set="count_id" t-value="count_id+1"/>
+
+                                        <tr>
+                                            <td>
+                                                <t t-esc="count_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="pk.description_picking"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="pk.product_item_code"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="pk.quantity_done"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="pk.product_id.uom_id"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <div class="container">
+                            <div class="row" style="height:30px;">
+                                <div class="col-4 text-center" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Test</p>
+                                </div>
+                                <div class="col-2" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Place Mark</p>
+                                </div>
+                                <div class="col-6 text-center" style="background-color: #d3d3d3; border:1px solid ;">
+                                    <p>Notes</p>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-4 text-center" style="background-color: #d3d3d3; border:1px solid;">
+                                    <span t-field="o.text"/>
+                                </div>
+                                <div class="col-2" style=" border:1px solid;">
+                                    <span t-field="o.place_mark"/>
+                                </div>
+                                <div class="col-6 text-center" style=" border:1px solid ;">
+                                    <span t-field="o.notes"/>
+                                </div>
+                            </div>
+                            <br/>
+
+
+                            <div class="row" style="height:30px;">
+                                <div class="col-4 text-left" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Place</p>
+                                </div>
+                                <div class="col-8 text-left" style="border:1px solid;">
+                                    <span t-field="o.place_mark"/>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-4 text-left" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Date, Time</p>
+                                </div>
+                                <div class="col-8 text-left" style="border:1px solid;">
+                                    <span t-field="o.date_deadline"/>
+                                </div>
+                            </div>
+
+
+                            <br/>
+                            <div class="row" style="height:30px;">
+                                <div class="col-6 text-left" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Signature Sheet</p>
+                                </div>
+                                <div class="col-6 text-left" style="background-color: #d3d3d3;border:1px solid;">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-6 text-left" style="background-color: #d3d3d3; border:1px solid;">
+                                    <p>Customer Name</p>
+                                </div>
+                                <div class="col-6 text-left" style="background-color: #d3d3d3;border:1px solid;">
+                                    <p>Note</p>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-6 text-left" style=" border:1px solid;">
+                                    <p>Name:</p>
+                                </div>
+                                <div class="col-6 text-left" style="border:1px solid;">
+                                    <p>Name:</p>
+                                </div>
+                            </div>
+                            <div class="row" style="height:30px;">
+                                <div class="col-6 text-left" style=" border:1px solid;">
+                                    <p>Signature:</p>
+                                </div>
+                                <div class="col-6 text-left" style="border:1px solid;">
+                                    <p>Signature:</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template t-name="web.external_layout_standard">
+        <div class="container" t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style"
+             height="10%">
+            <div class="row">
+                <div class="col-7 mb10" style="border-bottom:1px solid;">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                </div>
+                <div class="col-5 text-left" style="border-bottom:1px solid;font-size:10px;">
+                    <h6>Riyadh Office</h6>
+                    <h5 style="font-family:bold;">TECHNOSTREAM</h5>
+                    <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>
+                    <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,Saudia Arabia</h6>
+                </div>
+            </div>
+        </div>
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+
+            </div>
+            <t t-raw="0"/>
+        </div>
+        <div t-attf-class="footer o_standard_footer" position="attributes" id="footer" style="margin-top:0px;">
+            <attribute name="t-if">
+                <style>
+                    h6{
+                    font-size:13px;
+                    }
+                    p{
+                    font-family:bold;
+                    }
+                </style>
+                <div class="row">
+                    <div class="col-4" style="border-bottom:1px solid;">
+
+                    </div>
+                    <div class="col-4 text-center" style="margin-bottom:-13px;">
+                        <p>Engineering Solution and Services</p>
+                    </div>
+                    <div class="col-4" style="border-bottom:1px solid;">
+
+                    </div>
+
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-4" style="border-right:1px solid;">
+                        <h6>Corporate Head Office</h6>
+                        <h5 style="font-family:bold;">TECHNOSTREAM</h5>
+                        <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>
+                        <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,Saudia Arabia</h6>
+                    </div>
+                    <div class="col-4" style="border-right:1px solid;">
+                        <h6>Dubai Office</h6>
+                        <h5 style="font-family:bold;">TECHNOSTREAM</h5>
+                        <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>
+                        <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,Saudia Arabia</h6>
+                    </div>
+                    <div class="col-4">
+                        <h6>Abu Dhabi Office</h6>
+                        <h5 style="font-family:bold;">Bin Hilal TECHNOSTREAM</h5>
+                        <h6 style="margin-top:-7px;">Tel:+966(1)416 4458 | Fax:+966(1)416 4457</h6>
+                        <h6 style="margin-top:-4px;">P.O.Box67006,Riyadh11596,Saudia Arabia</h6>
+                    </div>
+                </div>
+
+            </attribute>
+        </div>
+        <!--            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout" position="after">-->
+        <div t-attf-class="footer o_standard_footer" position="after">
+            <!--                <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">-->
+            <div t-attf-class="footer o_standard_footer">
+                <t t-if="custom_footer" t-raw="custom_footer"/>
+            </div>
+        </div>
+    </template>
+</odoo>

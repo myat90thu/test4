@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>	
+
+	    <record id="view_hr_overtime_request_form" model="ir.ui.view">
+	        <field name="name">hr.overtime.request.form</field>
+	        <field name="model">hr.overtime.request</field>
+	        <field name="arch" type="xml">
+	        	<form string="Overtime Request">
+		            <header>
+                        <button string="Send Request" name="action_confirm" states="draft" type="object" class="oe_highlight"/>
+                        <button string="Approve Request" name="action_department_approve" states="validate1" type="object" groups="employee_overtime_approval_app.hr_overtime_department_manager" class="oe_highlight"/>
+                        <button string="Confirm Request" name="action_manager_confirm" states="validate2" type="object" groups="employee_overtime_approval_app.hr_overtime_hr_manager" class="oe_highlight"/>
+                        <button string="Refuse Request" name="action_refuse" states="validate1,validate2" type="object" groups="employee_overtime_approval_app.hr_overtime_department_manager,employee_overtime_approval_app.hr_overtime_hr_manager"/>
+                        <button string="Reset to Draft" name="action_draft" type="object" states="refuse"/>
+		                <field name="state" widget="statusbar" statusbar_visible="draft,validate1,validate2,done"/>
+		            </header>
+		        	<sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" readonly="1"/></h1>
+                            <h1><field name="display_name"/></h1>
+                        </div>
+		                <group>
+		                	<group>
+                                <field name="employee_id" invisible="1"/>
+                                <field name="request_date" readonly="1"/>
+                                <field name="number_of_hours" required="1"/>
+		                    </group>
+		                	<group>
+                                <field name="department_id" />
+                                <field name="job_id"/>
+                                <field name="hourly_wages" attrs="{'invisible': [('state', 'not in', ('validate2','done'))], 'required': [('state', '=', 'validate2')]}" />
+		                    </group>
+		                </group>
+                        <group string="Department Manager Details" name="department_details">
+                            <group>
+                                <field name="dept_manager_id" required="1"/>
+                            </group>
+                            <group>
+                                <field name="dept_confirm_date" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="HR Manager Details" name="hrmanager_details">
+                            <group>
+                                <field name="hr_manager_id" required="1"/>
+                            </group>
+                            <group>
+                                <field name="hr_confirm_date" readonly="1"/>
+                            </group>
+                        </group>
+                        <field name="notes" placeholder="Other Information ..." colspan="4" required="1"/>
+                        <h2 class="oe_highlight" attrs="{'invisible': [('state', '!=', 'refuse')]}">
+                            Refuse Information
+                        </h2>
+                        <group attrs="{'invisible': [('state', '!=', 'refuse')]}">
+                            <field name="rejected_by_id"/>
+                            <field name="rejected_date"/>
+                            <field name="rejected_reason"/>
+                        </group>
+	        		</sheet>
+	                <div class="oe_chatter">
+	                    <field name="message_follower_ids" widget="mail_followers"/>
+	                    <field name="message_ids" widget="mail_thread"/>
+	                </div>
+        		</form>
+        	</field>
+    	</record>
+
+	    <record id="view_hr_overtime_request_tree" model="ir.ui.view">
+	        <field name="name">hr.overtime.request.tree</field>
+	        <field name="model">hr.overtime.request</field>
+	        <field name="arch" type="xml">
+                <tree decoration-danger="state == 'refuse'" decoration-info="state == 'draft'"
+                string="Overtime Request">
+	        		<field name="employee_id" />
+            		<field name="request_date" />
+            		<field name="department_id" />
+            		<field name="job_id"/>
+                    <field name="state" />
+                </tree>
+        	</field>
+    	</record>
+
+        <!-- Overtime Request -->
+
+        <record id="view_hr_overtime_new_calendar" model="ir.ui.view">
+            <field name="name">Overtime Request</field>
+            <field name="model">hr.overtime.request</field>
+            <field name="arch" type="xml">
+                <calendar string="Overtime Request" date_start="request_date" mode="month" quick_add="False" color="employee_id">
+                    <field name="name"/>
+                    <field name="notes"/>
+                    <field name="employee_id"/>
+                    <field name="number_of_hours" />
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_hr_overtime_filter" model="ir.ui.view">
+            <field name="name">hr.overtime.request.filter</field>
+            <field name="model">hr.overtime.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Employee Overtime">
+                    <field name="name"/>
+                    <filter domain="[('state','=','validate1')]" string="To Approve" name="dept_approve"/>
+                    <filter domain="[('state','in',('validate2','done'))]" string="To Approve" name="hr_approve"/>
+                    <filter string="Approved Overtime" domain="[('state', '=', 'validate')]" name="validated"/>
+                    <separator/>
+                    <filter string="My Department Overtime" name="department_overtime" domain="[('dept_manager_id.user_id', '=', uid)]" help="My Department Overtime"/>
+                    <filter string="My HR Manager Overtime" name="hr_manager_overtime" domain="[('hr_manager_id.user_id', '=', uid)]" help="My HR Manager Overtime"/>
+                    <filter name="my_team_leaves" string="My Team Leaves" domain="[('employee_id.parent_id.user_id', '=', uid)]" help="Overtimes of Your Team Member"/>
+                    <separator/>
+                    <filter string="My Requests" name="my_overtime" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_name" string="Description" context="{'group_by':'name'}"/>
+                        <filter name="group_employee" string="Employee" context="{'group_by':'employee_id'}"/>
+                        <filter name="group_dept_manager" string="Department Manager" context="{'group_by':'dept_manager_id'}"/>
+                        <filter name="group_hr_manager" string="Hr Manager" context="{'group_by':'hr_manager_id'}"/>
+                        <separator/>
+                        <filter name="group_request_date" string="Start Month" context="{'group_by':'request_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+		<record model="ir.actions.act_window" id="open_ask_overtimes">
+			<field name="name">Overtime Request</field>
+			<field name="res_model">hr.overtime.request</field>
+			<!-- <field name="view_type">form</field> -->
+			<field name="view_id" ref="view_hr_overtime_request_form"/>
+            <field name="domain">[]</field>
+            <field name="search_view_id" ref="view_hr_overtime_filter"/>
+		</record>
+
+        <record id="action_open_ask_overtimes_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_hr_overtime_request_tree"/>
+            <field name="act_window_id" ref="open_ask_overtimes"/>
+        </record>
+
+        <record id="action_open_ask_overtimes_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_hr_overtime_request_form"/>
+            <field name="act_window_id" ref="open_ask_overtimes"/>
+        </record>
+
+        <record id="action_open_ask_overtimes_calendar" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="view_hr_overtime_new_calendar"/>
+            <field name="act_window_id" ref="open_ask_overtimes"/>
+        </record>
+
+		<menuitem id="action_hr_overtime_request_menu"
+			name="Employee Overtime Request"
+			parent="hr.menu_hr_root"
+			action="open_ask_overtimes"
+			sequence="91" />
+
+	</data>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_user_inherit" model="ir.ui.view">
+            <field name="name">Res User Inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='login']" position="after">
+                    <div class="oe_title">
+                        <label for="web_url" class="oe_edit_only"/>
+                        <h1>
+                            <field name="web_url"/>
+                        </h1>
+                    </div>
+                    <div class="oe_title">
+                        <label for="user_agent" class="oe_edit_only"/>
+                        <h1>
+                            <field name="user_agent"/>
+                        </h1>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="wizard_department_accept_request_form" model="ir.ui.view">
+        <field name="name">wizard.department.accept.request.form</field>
+        <field name="model">department.accept.request</field>
+        <field name="arch" type="xml">
+            <form string="Approve Request">
+                <group>
+                	<field name="confirm_date"/>         
+                </group>
+                <footer>
+                    <button name="confirm_button" string="Confirm" type="object" class="oe_highlight" />
+                    OR
+                    <button string="Cancel" class="bin-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_department_accept_request_1" model="ir.actions.act_window">
+        <field name="name">Approve Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">department.accept.request</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_department_accept_request_form"/>
+        <field name="target">new</field>
+
+    </record>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tree_view_product_brand" model="ir.ui.view">
+                <field name="name">view_product_brand_tree</field>
+                <field name="model">product.brand</field>
+                <field name="arch" type="xml">
+                    <tree string="Product Brand">
+                            <field name="name"/>
+                    </tree>
+                </field>
+    </record>
+
+    <record id="form_view_product_brand" model="ir.ui.view">
+                <field name="name">view_product_brand_form</field>
+                <field name="model">product.brand</field>
+                <field name="arch" type="xml">
+                    <form string="Product Brand">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    </form>
+                </field>
+    </record>
+
+    <record id="action_for_product_brand" model="ir.actions.act_window">
+        <field name="name">Product Brand</field>
+        <field name="res_model">product.brand</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+        <menuitem id="product_brand_menu" name="Product Brand" action="action_for_product_brand" parent="stock.menu_stock_inventory_control"/>
+
+</odoo>

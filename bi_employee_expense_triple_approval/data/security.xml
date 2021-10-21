@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="triple_approval_groups_gm" model="res.groups">
+            <field name="name">GM</field>
+        </record>
+
+        <record id="triple_approval_groups_finance" model="res.groups">
+            <field name="name">Finance</field>
+        </record>
+
+    </data>
+</odoo>
