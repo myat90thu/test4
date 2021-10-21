@@ -34,7 +34,7 @@
                         <group>
                             <field name="project_information" required="True"/>
                             <field name="project_name" required="True"/>
-<!--                            <field name="client_name" required="True"/>-->
+                            <field name="project_type"/>
                             <field name="consultant_name"/>
                             <field name="project_received_date"/>
                             <field name="proposal_submittal_deadline" required="True"/>

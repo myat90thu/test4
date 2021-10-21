@@ -5,7 +5,7 @@
         This module hide and change some fields and button attributes
     """,
     'author': "Muhammad Imran",
-    'depends': ['base', 'crm', 'sale_crm', 'project'],
+    'depends': ['base', 'crm', 'sale_crm','project'],
     'data': [
         'security/ir.model.access.csv',
         'data/lead_sequence.xml',
