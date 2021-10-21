@@ -4,11 +4,11 @@
 from odoo import api, fields, models, _
 from datetime import datetime, timedelta, date
 
-class bi_wizard_product_bundle(models.TransientModel):
+class BiWizardProductBundle(models.TransientModel):
     _name = 'wizard.product.bundle.bi'
     _description = "Wizard Product Bundle"
 
-    product_id = fields.Many2one('product.product', string='Group', required=True)
+    product_id = fields.Many2one('product.product', string='Group', required=True, domain=[('is_pack', '=', True)])
     total_discount = fields.Float(related='product_id.total_discount', string='Total Discount', readonly=True)
     total_ulp = fields.Float(related='product_id.total_ulp', string='Total Unit List Price', readonly=True)
     total_unp = fields.Float(related='product_id.total_unp', string='Total Unit Net Price', readonly=True)
